@@ -6,7 +6,31 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-actix-web = "4"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1"
+actix-rt = "1.1"
+actix = "0.10"
+actix-web = { version = "3.3.2", features = ["rustls"] }
+actix-web-actors = "3.0"
+actix-files = "0.4"
+actix-service = "1.0"
+actix-cors = "0.5"
+tokio = { version = "0.3", features = ["stream", "macros"] }
 futures = "0.3"
+
+mongodb = { version = "1.2.3", features = ["tokio-runtime"] }
+base64 = "0.13"
+serde = "*"
+serde_json = "*"
+csv = "1.1"
+rustls = "0.19"
+env_logger = "0.8"
+rand = "0.7"
+sha3 = "0.9"
+dashmap = "4.0.2"
+lettre = "0.10.0-beta.2"
+dotenv = "0.15.0"
+
+# remove when bitvec fixes their shit:  https://github.com/bitvecto-rs/bitvec/issues/105
+funty = "=1.1.0"
+
+# [profile.release]
+# debug = true
