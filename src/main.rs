@@ -38,9 +38,3 @@ async fn main() -> std::io::Result<()> {
     .run()
     .await
 }
-
-
-// .service(get_todo)
-//             .service(get_todo_by_id)
-//             .service(add_todo_by_id)
-//             .service(delete_todo_by_id)

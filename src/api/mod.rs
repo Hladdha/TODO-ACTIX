@@ -74,8 +74,9 @@ pub enum ApiError {
 }
 
 pub fn get_session_token(req: &HttpRequest) -> Option<SessionToken> {
+    println!("{:?}", req.headers().get("Cookie"));
     req.headers()
-        .get("SessionToken")
+        .get("Cookie")
         .map(|s| s.to_str().ok().map(|s| SessionToken::parse(s)))
         .flatten()
 }

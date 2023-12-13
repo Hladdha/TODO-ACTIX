@@ -19,6 +19,9 @@ pub struct UpdateTodo {
 
 async fn get_todo(req: HttpRequest, db_mgr: web::Data<Arc<DatabaseManager>>) -> HttpResponse {
     let session_token = get_session_token(&req);
+
+    println!("{:?}", session_token);
+
     let user_id = match session_token {
         Some(session_token) => db_mgr
             .users
@@ -28,9 +31,12 @@ async fn get_todo(req: HttpRequest, db_mgr: web::Data<Arc<DatabaseManager>>) -> 
         None => None,
     };
 
-    HttpResponse::Ok().json(
-        db_mgr.todo.get_user_todo(user_id.unwrap()).await
-    )
+    if let Some(user_id) = user_id {
+        HttpResponse::Ok().json(
+        db_mgr.todo.get_user_todo(user_id).await
+    )}else {
+        ApiResponse::from(ApiError::InternalServerError)
+    }
 }
 
 async fn add_to_todo(

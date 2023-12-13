@@ -1,6 +1,6 @@
 use futures::future::OptionFuture;
 use mongodb::{
-    bson::{self, doc},
+    bson::doc,
     Collection, Database,
 };
 use serde::{Deserialize, Serialize};
@@ -117,17 +117,6 @@ impl UserCollection {
     pub async fn insert(&self, user: BackendUserMe) -> bool {
         self.collection
             .insert_one(DbUser::from_backend_user(user), None)
-            .await
-            .is_ok()
-    }
-
-    pub async fn update(&self, user: BackendUserMe) -> bool {
-        self.collection
-            .update_one(
-                doc! { "_id": user.id.to_string()},
-                doc! { "$set": bson::to_document(&DbUser::from_backend_user(user.clone())).unwrap() },
-                None,
-            )
             .await
             .is_ok()
     }

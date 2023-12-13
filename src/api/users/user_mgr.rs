@@ -27,7 +27,6 @@ pub struct UserAuth {
 }
 
 pub mod msg {
-
     use super::*;
     use crate::api::users::session_token::SessionToken;
 

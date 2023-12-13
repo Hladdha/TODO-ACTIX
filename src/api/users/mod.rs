@@ -21,7 +21,12 @@ async fn register(
         .send(user_mgr::msg::Register(payload.into_inner()))
         .await
     {
-        Ok(Ok(session_token)) => HR::Ok().json(ApiResponse::with_content(
+        Ok(Ok(session_token)) => HR::Ok().cookie(
+            actix_web::cookie::Cookie::build("", session_token.to_string())
+                .http_only(true)
+                .path("/api")
+                .finish(),
+        ).json(ApiResponse::with_content(
             "Registration successful.",
             session_token,
         )),
@@ -38,7 +43,12 @@ async fn login(
         .send(user_mgr::msg::Login(payload.into_inner()))
         .await
     {
-        Ok(Ok(session_token)) => HR::Ok().json(ApiResponse::with_content(
+        Ok(Ok(session_token)) => HR::Ok().cookie(
+            actix_web::cookie::Cookie::build("", session_token.to_string())
+                .http_only(true)
+                .path("/api")
+                .finish(),
+        ).json(ApiResponse::with_content(
             "Login successful.",
             session_token,
         )),
