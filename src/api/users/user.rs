@@ -10,7 +10,7 @@ pub struct UserId([char; USER_ID_LEN]);
 
 impl Ord for UserId {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        self.to_string().cmp(&other.to_string())
+        self.to_string().cmp(&other.to_string())      
     }
 }
 
